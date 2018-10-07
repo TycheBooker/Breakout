@@ -18,6 +18,44 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\General\AssetManager.cpp" />
+    <ClCompile Include="source\General\Game.cpp" />
+    <ClCompile Include="source\General\MusicPlayer.cpp" />
+    <ClCompile Include="source\General\StateManager.cpp" />
+    <ClCompile Include="source\GUI\BlinkingLabel.cpp" />
+    <ClCompile Include="source\GUI\TextElement.cpp" />
+    <ClCompile Include="source\GUI\Title.cpp" />
+    <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\Screens\EndScreen.cpp" />
+    <ClCompile Include="source\Screens\GameScreen.cpp" />
+    <ClCompile Include="source\Screens\BaseScreen.cpp" />
+    <ClCompile Include="source\Screens\StartScreen.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\General\AssetManager.h" />
+    <ClInclude Include="include\General\Game.h" />
+    <ClInclude Include="include\General\MusicPlayer.h" />
+    <ClInclude Include="include\General\Settings.h" />
+    <ClInclude Include="include\General\StateManager.h" />
+    <ClInclude Include="include\GUI\BlinkingLabel.h" />
+    <ClInclude Include="include\GUI\TextElement.h" />
+    <ClInclude Include="include\GUI\Title.h" />
+    <ClInclude Include="include\Screens\EndScreen.h" />
+    <ClInclude Include="include\Screens\GameScreen.h" />
+    <ClInclude Include="include\Screens\BaseScreen.h" />
+    <ClInclude Include="include\Screens\StartScreen.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="data\images\background.jpg" />
+    <Image Include="data\images\ball.png" />
+    <Image Include="data\images\block01.png" />
+    <Image Include="data\images\block02.png" />
+    <Image Include="data\images\block03.png" />
+    <Image Include="data\images\block04.png" />
+    <Image Include="data\images\block05.png" />
+    <Image Include="data\images\paddle.png" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{641A5EFD-3F82-44C6-85BE-5676324C29DF}</ProjectGuid>
     <RootNamespace>Breakout</RootNamespace>
@@ -74,7 +112,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)SFML-2.5.0\include;$(ProjectDir)include\General;$(ProjectDir)include\Screens;$(ProjectDir)include\GUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(SolutionDir)SFML-2.5.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-audio-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -90,10 +134,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)SFML-2.5.0\include;$(ProjectDir)include\General;$(ProjectDir)include\Screens;$(ProjectDir)include\GUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)SFML-2.5.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-audio.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -109,8 +157,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
