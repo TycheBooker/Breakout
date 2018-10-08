@@ -19,7 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\Game\Ball.cpp" />
+    <ClCompile Include="source\Game\Brick.cpp" />
+    <ClCompile Include="source\Game\HUD.cpp" />
+    <ClCompile Include="source\Game\Level.cpp" />
+    <ClCompile Include="source\Game\Paddle.cpp" />
     <ClCompile Include="source\General\AssetManager.cpp" />
+    <ClCompile Include="source\Game\BaseObject.cpp" />
     <ClCompile Include="source\General\Game.cpp" />
     <ClCompile Include="source\General\MusicPlayer.cpp" />
     <ClCompile Include="source\General\StateManager.cpp" />
@@ -33,7 +39,13 @@
     <ClCompile Include="source\Screens\StartScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Game\Ball.h" />
+    <ClInclude Include="include\Game\Brick.h" />
+    <ClInclude Include="include\Game\HUD.h" />
+    <ClInclude Include="include\Game\Level.h" />
+    <ClInclude Include="include\Game\Paddle.h" />
     <ClInclude Include="include\General\AssetManager.h" />
+    <ClInclude Include="include\Game\BaseObject.h" />
     <ClInclude Include="include\General\Game.h" />
     <ClInclude Include="include\General\MusicPlayer.h" />
     <ClInclude Include="include\General\Settings.h" />
@@ -112,7 +124,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)SFML-2.5.0\include;$(ProjectDir)include\General;$(ProjectDir)include\Screens;$(ProjectDir)include\GUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SFML-2.5.0\include;$(ProjectDir)include\General;$(ProjectDir)include\Screens;$(ProjectDir)include\GUI;$(ProjectDir)include\Game;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -134,7 +146,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)SFML-2.5.0\include;$(ProjectDir)include\General;$(ProjectDir)include\Screens;$(ProjectDir)include\GUI;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SFML-2.5.0\include;$(ProjectDir)include\General;$(ProjectDir)include\Screens;$(ProjectDir)include\GUI;$(ProjectDir)include\Game;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>

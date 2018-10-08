@@ -1,9 +1,11 @@
 #pragma once
-#include <vector>
-#include <algorithm>
-#include <random>
 #include "BaseScreen.h"
-#include "EndScreen.h"
+#include "BaseObject.h"
+#include "HUD.h"
+#include "Level.h"
+#include "Paddle.h"
+#include "Ball.h"
+#include "Level.h"
 
 class GameScreen : public BaseScreen
 {
@@ -17,5 +19,10 @@ public:
 private:
 	void finishGame();
 
-	//HUD * gameHUD;
+	HUD gameHUD;
+	Level level;
+	Paddle paddle;
+	Ball ball;
+
+	std::vector<BaseObject *> gameObjects;
 };

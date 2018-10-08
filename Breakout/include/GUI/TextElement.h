@@ -1,14 +1,15 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+#include "BaseObject.h"
 #include "AssetManager.h"
 
-class TextElement : public sf::Drawable, public sf::Transformable
+class TextElement : public BaseObject
 {
 public:
 	TextElement(std::string text);
 	virtual ~TextElement();
 
 	virtual void update(sf::Time deltaTime);
+	virtual sf::FloatRect getGlobalBounds();
 	virtual sf::Vector2f getSize();
 	virtual float getMarginBottom();
 

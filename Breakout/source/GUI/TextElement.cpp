@@ -19,6 +19,11 @@ void TextElement::update(sf::Time deltaTime)
 {
 }
 
+sf::FloatRect TextElement::getGlobalBounds()
+{
+	return getTransform().transformRect(text.getLocalBounds());
+}
+
 sf::Vector2f TextElement::getSize()
 {
 	return sf::Vector2f(text.getLocalBounds().width, text.getLocalBounds().height);
