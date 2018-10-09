@@ -11,5 +11,5 @@ constexpr char fontsPath[] = "assets/Fonts/";
 constexpr char audioPath[] = "assets/Sounds/";
 
 // Game Settings
-constexpr float ballVelocity = 8.f;
+constexpr float ballVelocity = 6.f;
 constexpr float paddleVelocity = 6.f;

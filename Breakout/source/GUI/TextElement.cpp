@@ -34,14 +34,14 @@ float TextElement::getMarginBottom()
 	return marginBottom;
 }
 
+std::string TextElement::getText()
+{
+	return text.getString();
+}
+
 void TextElement::setText(std::string text)
 {
 	this->text.setString(text);
-}
-
-void TextElement::setColor(sf::Color color)
-{
-	text.setFillColor(color);
 }
 
 void TextElement::setCharacterSize(unsigned size)

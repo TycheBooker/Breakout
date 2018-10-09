@@ -1,13 +1,25 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "BaseObject.h"
+#include "TextElement.h"
+#include "StateManager.h"
 
-class HUD
+class HUD : public BaseObject
 {
 public:
-	HUD();
+	HUD(StateManager * stateManager);
 	~HUD();
 
-	void renderHUD(sf::RenderWindow & window);
-	void updateHUD(sf::Time deltaTime);
+	virtual void update(sf::Time deltaTime);
+private:
+	virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const;
+	void createLabel(std::string labelText, bool alignLeft);
+
+	TextElement points;
+	TextElement lives;
+	std::vector <TextElement *> HUDElements;
+	float pageMargin;
+
+	StateManager * stateManager;
 };
 

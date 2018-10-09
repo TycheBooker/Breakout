@@ -9,7 +9,7 @@ public:
 	~Paddle();
 
 	virtual void update(sf::Time deltaTime);
-	virtual sf::FloatRect getGlobalBounds();
+	sf::FloatRect getGlobalBounds();
 
 	void paddleCollision(Ball & ball);
 private:

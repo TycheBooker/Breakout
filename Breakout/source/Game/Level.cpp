@@ -1,6 +1,6 @@
+#include <algorithm>
 #include "Level.h"
 #include "Settings.h"
-#include <iostream>
 
 constexpr int rowCount = 3;
 constexpr int columnCount = 20;
@@ -9,7 +9,8 @@ constexpr int columnSpacing = 3;
 constexpr int brickWidth = 32;
 constexpr int brickHeight = 16;
 
-Level::Level()
+Level::Level(std::function<void(int)> increaseScore) :
+	increaseScore(increaseScore)
 {
 	loadLevel();
 }
@@ -25,37 +26,43 @@ void Level::update(sf::Time deltaTime)
 	}
 }
 
-sf::FloatRect Level::getGlobalBounds()
-{
-	return sf::FloatRect();
-}
-
 void Level::brickCollision(Ball & ball)
 {
+	sf::FloatRect ballBounds = ball.getGlobalBounds();
+
 	for (auto & brick : bricks) {
-		if (!brick->getGlobalBounds().intersects(ball.getGlobalBounds())) continue;
+		sf::FloatRect brickBounds = brick->getGlobalBounds();
+
+		if (!brickBounds.intersects(ballBounds)) continue;
 		brick->getHit();
+
+		// intersection amount by directions
+		float intersectLeft = ballBounds.left + ballBounds.width  - brickBounds.left;
+		float intersectRight = brickBounds.left + brickBounds.width - ballBounds.left;
+		float intersectTop = ballBounds.top + ballBounds.height - brickBounds.top;
+		float intersectBottom = brickBounds.top + brickBounds.height - ballBounds.top;
+
+		// hit direction by axis
+		bool hitLeft(abs(intersectLeft) < abs(intersectRight));
+		bool hitTop(abs(intersectTop) < abs(intersectBottom));
+
+		// intersection amount by axis
+		float intersectX = hitLeft ? intersectLeft : intersectRight;
+		float intersectY = hitTop ? intersectTop : intersectBottom;
+
+		// change velocity by hit direction
+		if (abs(intersectX) < abs(intersectY))
+			ball.velocity.x = hitLeft ? -ballVelocity : ballVelocity;
+		else
+			ball.velocity.y = hitTop ? -ballVelocity : ballVelocity;
 	}
+	
+	evaluateBricks();
+}
 
-	//bool ballFromLeft(abs(overlapLeft) < abs(overlapRight));
-
-	//// We can apply the same idea for top/bottom collisions.
-	//bool ballFromTop(abs(overlapTop) < abs(overlapBottom));
-
-	//// Let's store the minimum overlaps for the X and Y axes.
-	//float minOverlapX{ ballFromLeft ? overlapLeft : overlapRight };
-	//float minOverlapY{ ballFromTop ? overlapTop : overlapBottom };
-
-	//// If the magnitude of the X overlap is less than the magnitude
-	//// of the Y overlap, we can safely assume the ball hit the brick
-	//// horizontally - otherwise, the ball hit the brick vertically.
-
-	//// Then, upon our assumptions, we change either the X or Y velocity
-	//// of the ball, creating a "realistic" response for the collision.
-	//if (abs(minOverlapX) < abs(minOverlapY))
-	//	mBall.velocity.x = ballFromLeft ? -ballVelocity : ballVelocity;
-	//else
-	//	mBall.velocity.y = ballFromTop ? -ballVelocity : ballVelocity;
+bool Level::isFinnished()
+{
+	return bricks.size() == 0;
 }
 
 void Level::draw(sf::RenderTarget & target, sf::RenderStates states) const
@@ -81,4 +88,21 @@ void Level::loadLevel()
 			bricks.push_back(brick);
 		}
 	}
+}
+
+void Level::evaluateBricks()
+{
+	bricks.erase(
+		std::remove_if(
+			bricks.begin(),
+			bricks.end(),
+			[this](const Brick * brick) -> bool {
+				if (brick->isDestroyed()) {
+					increaseScore(brick->getBreakScore());
+					return true;
+				}
+			}
+		),
+		bricks.end()
+	);
 }

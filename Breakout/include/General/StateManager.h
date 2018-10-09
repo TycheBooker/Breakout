@@ -18,8 +18,10 @@ public:
 
 	void switchScreen(Screen newScreen);
 	void clearScore();
-
+	void loseLife();
+	void increaseScore(int points);
 	int getScore();
+	int getLives();
 	bool isDead();
 
 	BaseScreen * getCurrentScreen();
@@ -31,6 +33,6 @@ private:
 	sf::RenderWindow * window;
 
 	int score;
-	bool dead;
+	int lives;
 };
 

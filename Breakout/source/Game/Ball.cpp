@@ -3,12 +3,13 @@
 #include "Paddle.h"
 #include "Level.h"
 
-Ball::Ball() :
+Ball::Ball(Paddle * paddle, std::function<void()> loseLife) :
 	ballSprite(AssetManager::getInstance()->getTexture("ball.png")),
-	velocity(0, 0)
+	paddle(paddle),
+	loseLife(loseLife)
 {
 	setOrigin(ballSprite.getLocalBounds().width / 2.f, ballSprite.getLocalBounds().height / 2.f);
-	setPosition(windowWidth / 2.f, windowHeight - 100.f - ballSprite.getLocalBounds().height);
+	restartBall();
 }
 
 Ball::~Ball()
@@ -25,27 +26,22 @@ void Ball::update(sf::Time deltaTime)
 		ballSprite.getLocalBounds().width / 2.f,
 		ballSprite.getLocalBounds().height / 2.f,
 	};
-	if (ballBounds.left < 0) velocity.x = ballVelocity;
-	else if (ballBounds.left + ballBounds.width > windowWidth)
+	if (ballBounds.left < 0) {
+		velocity.x = ballVelocity;
+	}
+	else if (ballBounds.left + ballBounds.width > windowWidth) {
 		velocity.x = -ballVelocity;
-	if (ballBounds.top < 0)
+	}
+	if (ballBounds.top < 0) {
 		velocity.y = ballVelocity;
-	// remove bottom;
-	else if (ballBounds.top + ballBounds.height > windowHeight)
-		velocity.y = -ballVelocity;
+	}
+	else if (ballBounds.top + ballBounds.height > windowHeight) {
+		loseLife();
+		restartBall();
+	}
 
 	if (velocity.y == 0) {
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) &&
-			getPosition().x - ballSprite.getLocalBounds().width / 2.f > 0) {
-			velocity.x = -paddleVelocity;
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) &&
-			getPosition().x + ballSprite.getLocalBounds().width / 2.f < windowWidth) {
-			velocity.x = paddleVelocity;
-		}
-		else {
-			velocity.x = 0;
-		}
+		setPosition(paddle->getPosition().x, getPosition().y);
 	}
 }
 
@@ -68,4 +64,10 @@ void Ball::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
 	target.draw(ballSprite, states);
+}
+
+void Ball::restartBall()
+{
+	velocity = {0, 0};
+	setPosition(windowWidth / 2.f, windowHeight - 100.f - ballSprite.getLocalBounds().height);
 }

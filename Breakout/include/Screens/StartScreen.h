@@ -15,7 +15,7 @@ public:
 	virtual void handleInput(sf::Event event);
 private:
 	void createTitle(std::string titleText);
-	void createLabel(std::string labelTxt);
+	void createBlinkingLabel(std::string labelText);
 
 	std::vector<TextElement *> pageElements;
 	float pageMargin;

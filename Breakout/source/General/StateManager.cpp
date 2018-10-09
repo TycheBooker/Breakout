@@ -6,7 +6,7 @@
 
 StateManager::StateManager(sf::RenderWindow * window) :
 	score(0),
-	dead(false),
+	lives(3),
 	window(window)
 {
 }
@@ -51,9 +51,14 @@ int StateManager::getScore()
 	return score;
 }
 
+int StateManager::getLives()
+{
+	return lives;
+}
+
 bool StateManager::isDead()
 {
-	return dead;
+	return lives <= 0;
 }
 
 BaseScreen * StateManager::getCurrentScreen()
@@ -69,6 +74,16 @@ sf::RenderWindow * StateManager::getWindow()
 void StateManager::clearScore()
 {
 	score = 0;
-	dead = false;
+	lives = 3;
+}
+
+void StateManager::loseLife()
+{
+	lives--;
+}
+
+void StateManager::increaseScore(int points)
+{
+	score += points;
 }
 

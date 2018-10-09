@@ -23,6 +23,22 @@ sf::FloatRect Brick::getGlobalBounds()
 void Brick::getHit()
 {
 	hitPoints--;
+	if (hitPoints == 0) {
+		// play break sound
+	}
+	else {
+		// play hit sound
+	}
+}
+
+bool Brick::isDestroyed() const
+{
+	return hitPoints <= 0;
+}
+
+unsigned Brick::getBreakScore() const
+{
+	return breakScore;
 }
 
 void Brick::draw(sf::RenderTarget & target, sf::RenderStates states) const

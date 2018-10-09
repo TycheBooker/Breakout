@@ -1,20 +1,20 @@
 #include "Settings.h"
 #include "StartScreen.h"
 #include "Title.h"
+#include "BlinkingLabel.h"
 
 StartScreen::StartScreen(StateManager * stateManager) :
 	BaseScreen(stateManager),
 	pageMargin(100.f)
 {
 	createTitle("BREAKOUT");
-	createLabel("Press Enter to Play!");
+	createBlinkingLabel("Press Enter to Play!");
 }
 
 StartScreen::~StartScreen()
 {
-	for (size_t i = 0; i < pageElements.size(); i++)
-	{
-		delete pageElements[i];
+	for (auto & element : pageElements) {
+		delete element;
 	}
 	pageElements.clear();
 }
@@ -22,14 +22,16 @@ StartScreen::~StartScreen()
 
 void StartScreen::renderScreen(sf::RenderWindow &window)
 {
-	for (size_t i = 0; i < pageElements.size(); i++)
-	{
-		window.draw(*pageElements[i]);
+	for (auto & element : pageElements) {
+		window.draw(*element);
 	}
 }
 
 void StartScreen::updateScreen(sf::Time deltaTime)
 {
+	for (auto & element : pageElements) {
+		element->update(deltaTime);
+	}
 }
 
 void StartScreen::handleInput(sf::Event event)
@@ -46,15 +48,14 @@ void StartScreen::createTitle(std::string titleText)
 	pageElements.push_back(title);
 }
 
-void StartScreen::createLabel(std::string labelText)
+void StartScreen::createBlinkingLabel(std::string labelText)
 {
-	TextElement * label = new TextElement(labelText);
+	TextElement * label = new BlinkingLabel(labelText);
 	label->centerText();
 	float pageElementsHeight = pageMargin;
-	for (size_t i = 0; i < pageElements.size(); i++)
-	{
-		pageElementsHeight += pageElements[i]->getSize().y;
-		pageElementsHeight += pageElements[i]->getMarginBottom();
+	for (auto & element : pageElements) {
+		pageElementsHeight += element->getSize().y;
+		pageElementsHeight += element->getMarginBottom();
 	}
 	label->move(0, pageElementsHeight);
 	pageElements.push_back(label);

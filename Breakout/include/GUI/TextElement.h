@@ -12,9 +12,9 @@ public:
 	virtual sf::FloatRect getGlobalBounds();
 	virtual sf::Vector2f getSize();
 	virtual float getMarginBottom();
+	virtual std::string getText();
 
 	virtual void setText(std::string text);
-	virtual void setColor(sf::Color color);
 	virtual void setCharacterSize(unsigned size);
 	virtual void centerText();
 protected:

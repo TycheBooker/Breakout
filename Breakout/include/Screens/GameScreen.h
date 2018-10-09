@@ -17,6 +17,8 @@ public:
 	virtual void updateScreen(sf::Time deltaTime);
 	virtual void handleInput(sf::Event event);
 private:
+	void loseLife();
+	void increaseScore(int points);
 	void finishGame();
 
 	HUD gameHUD;

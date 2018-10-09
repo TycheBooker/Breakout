@@ -9,8 +9,10 @@ public:
 	~Brick();
 
 	virtual void update(sf::Time deltaTime);
-	virtual sf::FloatRect getGlobalBounds();
+	sf::FloatRect getGlobalBounds();
 	void getHit();
+	bool isDestroyed() const;
+	unsigned getBreakScore() const;
 private:
 	virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const;
 	void createBrick(std::string ID);
@@ -20,7 +22,7 @@ private:
 	//sf::Sound breakSound;
 
 	std::string ID;
-	unsigned hitPoints;
-	unsigned breakScore;
+	int hitPoints;
+	int breakScore;
 };
 
