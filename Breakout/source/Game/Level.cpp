@@ -1,18 +1,12 @@
 #include <algorithm>
 #include "Level.h"
 #include "Settings.h"
-
-constexpr int rowCount = 3;
-constexpr int columnCount = 20;
-constexpr int rowSpacing = 3;
-constexpr int columnSpacing = 3;
-constexpr int brickWidth = 32;
-constexpr int brickHeight = 16;
+#include <iostream>
 
 Level::Level(std::function<void(int)> increaseScore) :
 	increaseScore(increaseScore)
 {
-	loadLevel();
+	loadLevel("assets/data/Level1");
 }
 
 Level::~Level()
@@ -74,18 +68,81 @@ void Level::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	}
 }
 
-void Level::loadLevel()
+void Level::loadLevel(std::string levelPath)
 {
-	backgroundTexture = AssetManager::getInstance()->getTexture("");
-	background.setTexture(&backgroundTexture);
+	tinyxml2::XMLDocument doc;
+	doc.LoadFile("assets/Data/Level1.xml");
+	tinyxml2::XMLElement * level = doc.FirstChildElement("Level");
+
+	setLevelAttributes(level);
+	createBrickTypes(level);
+	createBricks(level);
+
+	//return doc.ErrorID();
+}
+
+void Level::setLevelAttributes(tinyxml2::XMLElement * level)
+{
+	const char * backgroundTexture;
+
+	level->QueryIntAttribute("RowCount", &rowCount);
+	level->QueryIntAttribute("ColumnCount", &columnCount);
+	level->QueryIntAttribute("RowSpacing", &rowSpacing);
+	level->QueryIntAttribute("ColumnSpacing", &columnSpacing);
+	level->QueryStringAttribute("BackgroundTexture", &backgroundTexture);
+
+	this->backgroundTexture = AssetManager::getInstance()->getTexture(backgroundTexture);
+	background.setTexture(&this->backgroundTexture);
+}
+
+void Level::createBrickTypes(tinyxml2::XMLElement * level)
+{
+	tinyxml2::XMLElement * brickTypes = level->FirstChildElement("BrickTypes");
+	for (auto * brickType = brickTypes->FirstChildElement("BrickType"); brickType; brickType = brickType->NextSiblingElement("BrickType")) {
+		const char * ID;
+		int hitPoints;
+		int breakScore;
+		const char * texture;
+		const char * hitSound;
+		const char * breakSound;
+
+		brickType->QueryStringAttribute("Id", &ID);
+		brickType->QueryIntAttribute("HitPoints", &hitPoints);
+		brickType->QueryIntAttribute("BreakScore", &breakScore);
+		brickType->QueryStringAttribute("Texture", &texture);
+		brickType->QueryStringAttribute("HitSound", &hitSound);
+		brickType->QueryStringAttribute("BreakSound", &breakSound);
+
+		std::cout << ID << std::endl << ID[0] << std::endl;
+
+		this->brickTypes.emplace(ID[0], & BrickType(ID[0], hitPoints, breakScore, texture, hitSound, breakSound));
+	}
+}
+
+void Level::createBricks(tinyxml2::XMLElement * level)
+{
+	tinyxml2::XMLElement* bricks = level->FirstChildElement("Bricks");
+	const char* brickLayout = bricks->GetText();
+
 	float margin = (windowWidth - ((brickWidth + rowSpacing) * columnCount - rowSpacing)) / 2.f;
+	auto brickCount = brickLayout.begin;
 	for (float i = 0; i < columnCount; i++)
 	{
 		for (float y = 0; y < rowCount; y++)
 		{
-			sf::Vector2f position = { margin + i * brickWidth + i * rowSpacing, margin + y * brickHeight + y * columnSpacing };
-			Brick * brick = new Brick("S", position);
-			bricks.push_back(brick);
+			//std::cout << brickLayout[brickCount] << std::endl;
+
+			// find brick type by Id in layout
+			//auto brickTypeItr = this->brickTypes.find(brickLayout[brickCount]);
+			//if (brickTypeItr != this->brickTypes.end()) {
+			//	return; // brick type not found
+			//}
+			//
+			//sf::Vector2f position = { margin + i * brickWidth + i * rowSpacing, margin + y * brickHeight + y * columnSpacing };
+
+			//Brick * brick = new Brick(brickTypeItr->second, position);
+			//this->bricks.push_back(brick);
+			brickCount++;
 		}
 	}
 }
@@ -101,6 +158,7 @@ void Level::evaluateBricks()
 					increaseScore(brick->getBreakScore());
 					return true;
 				}
+				return false;
 			}
 		),
 		bricks.end()

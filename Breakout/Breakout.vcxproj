@@ -59,14 +59,19 @@
     <ClInclude Include="include\Screens\StartScreen.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="data\images\background.jpg" />
-    <Image Include="data\images\ball.png" />
-    <Image Include="data\images\block01.png" />
-    <Image Include="data\images\block02.png" />
-    <Image Include="data\images\block03.png" />
-    <Image Include="data\images\block04.png" />
-    <Image Include="data\images\block05.png" />
-    <Image Include="data\images\paddle.png" />
+    <Font Include="assets\Fonts\AtariClassic-Regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\Textures\ball.png" />
+    <Image Include="assets\Textures\paddle.png" />
+    <Image Include="assets\Textures\soft.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="assets\Music\251461__joshuaempyre__arcade-music-loop.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="assets\Data\dream.xml" />
+    <Xml Include="assets\Data\Level1.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{641A5EFD-3F82-44C6-85BE-5676324C29DF}</ProjectGuid>
@@ -124,12 +129,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)SFML-2.5.0\include;$(ProjectDir)include\General;$(ProjectDir)include\Screens;$(ProjectDir)include\GUI;$(ProjectDir)include\Game;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SFML-2.5.0\include;$(SolutionDir)tinyxml2\include;$(ProjectDir)include\General;$(ProjectDir)include\Screens;$(ProjectDir)include\GUI;$(ProjectDir)include\Game;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)SFML-2.5.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-d.lib;sfml-audio-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)SFML-2.5.0\lib;$(SolutionDir)tinyxml2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-audio-d.lib;sfml-window-d.lib;sfml-system-d.lib;tinyxml2-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -146,14 +151,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)SFML-2.5.0\include;$(ProjectDir)include\General;$(ProjectDir)include\Screens;$(ProjectDir)include\GUI;$(ProjectDir)include\Game;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SFML-2.5.0\include;$(SolutionDir)tinyxml2\include;$(ProjectDir)include\General;$(ProjectDir)include\Screens;$(ProjectDir)include\GUI;$(ProjectDir)include\Game;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)SFML-2.5.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-audio.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)SFML-2.5.0\lib;$(SolutionDir)tinyxml2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-audio.lib;sfml-window.lib;sfml-system.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

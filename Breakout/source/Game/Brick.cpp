@@ -1,9 +1,9 @@
 #include "Brick.h"
 
-Brick::Brick(std::string ID, sf::Vector2f position) :
-	ID(ID)
+Brick::Brick(BrickType * brickType, sf::Vector2f position) :
+	brickType(brickType)
 {
-	createBrick(ID);
+	brickSprite.setTexture(brickType->texture);
 	setPosition(position);
 }
 
@@ -22,23 +22,23 @@ sf::FloatRect Brick::getGlobalBounds()
 
 void Brick::getHit()
 {
-	hitPoints--;
-	if (hitPoints == 0) {
-		// play break sound
+	brickType->hitPoints--;
+	if (brickType->hitPoints == 0) {
+		brickType->breakSound.play();
 	}
 	else {
-		// play hit sound
+		brickType->hitSound.play();
 	}
 }
 
 bool Brick::isDestroyed() const
 {
-	return hitPoints <= 0;
+	return brickType->hitPoints <= 0;
 }
 
 unsigned Brick::getBreakScore() const
 {
-	return breakScore;
+	return brickType->breakScore;
 }
 
 void Brick::draw(sf::RenderTarget & target, sf::RenderStates states) const
@@ -47,9 +47,3 @@ void Brick::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(brickSprite, states);
 }
 
-void Brick::createBrick(std::string ID)
-{
-	brickSprite.setTexture(AssetManager::getInstance()->getTexture("soft.png"));
-	hitPoints = 1;
-	breakScore = 50;
-}
