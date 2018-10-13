@@ -12,9 +12,9 @@ struct BrickType {
 		breakSound(AssetManager::getInstance()->getSoundBuffer(breakSound))
 	{}
 
-	char ID;
-	int hitPoints;
-	int breakScore;
+	const char ID;
+	const int hitPoints;
+	const int breakScore;
 	sf::Texture texture;
 	sf::Sound hitSound;
 	sf::Sound breakSound;
@@ -34,7 +34,8 @@ public:
 private:
 	virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const;
 
-	sf::Sprite brickSprite;
 	BrickType * brickType;
+	sf::Sprite brickSprite;
+	int hitPoints;
 };
 

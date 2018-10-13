@@ -31,7 +31,7 @@ void Level::brickCollision(Ball & ball)
 		brick->getHit();
 
 		// intersection amount by directions
-		float intersectLeft = ballBounds.left + ballBounds.width  - brickBounds.left;
+		float intersectLeft = ballBounds.left + ballBounds.width - brickBounds.left;
 		float intersectRight = brickBounds.left + brickBounds.width - ballBounds.left;
 		float intersectTop = ballBounds.top + ballBounds.height - brickBounds.top;
 		float intersectBottom = brickBounds.top + brickBounds.height - ballBounds.top;
@@ -50,7 +50,7 @@ void Level::brickCollision(Ball & ball)
 		else
 			ball.velocity.y = hitTop ? -ballVelocity : ballVelocity;
 	}
-	
+
 	evaluateBricks();
 }
 
@@ -97,8 +97,8 @@ void Level::setLevelAttributes(tinyxml2::XMLElement * level)
 
 void Level::createBrickTypes(tinyxml2::XMLElement * level)
 {
-	tinyxml2::XMLElement * brickTypes = level->FirstChildElement("BrickTypes");
-	for (auto * brickType = brickTypes->FirstChildElement("BrickType"); brickType; brickType = brickType->NextSiblingElement("BrickType")) {
+	tinyxml2::XMLElement * xmlBrickTypes = level->FirstChildElement("BrickTypes");
+	for (auto * xmlBrickType = xmlBrickTypes->FirstChildElement("BrickType"); xmlBrickType; xmlBrickType = xmlBrickType->NextSiblingElement("BrickType")) {
 		const char * ID;
 		int hitPoints;
 		int breakScore;
@@ -106,61 +106,61 @@ void Level::createBrickTypes(tinyxml2::XMLElement * level)
 		const char * hitSound;
 		const char * breakSound;
 
-		brickType->QueryStringAttribute("Id", &ID);
-		brickType->QueryIntAttribute("HitPoints", &hitPoints);
-		brickType->QueryIntAttribute("BreakScore", &breakScore);
-		brickType->QueryStringAttribute("Texture", &texture);
-		brickType->QueryStringAttribute("HitSound", &hitSound);
-		brickType->QueryStringAttribute("BreakSound", &breakSound);
+		xmlBrickType->QueryStringAttribute("Id", &ID);
+		xmlBrickType->QueryIntAttribute("HitPoints", &hitPoints);
+		xmlBrickType->QueryIntAttribute("BreakScore", &breakScore);
+		xmlBrickType->QueryStringAttribute("Texture", &texture);
+		xmlBrickType->QueryStringAttribute("HitSound", &hitSound);
+		xmlBrickType->QueryStringAttribute("BreakSound", &breakSound);
 
-		std::cout << ID << std::endl << ID[0] << std::endl;
-
-		this->brickTypes.emplace(ID[0], & BrickType(ID[0], hitPoints, breakScore, texture, hitSound, breakSound));
+		BrickType * brickType = new BrickType(ID[0], hitPoints, breakScore, texture, hitSound, breakSound);
+		brickTypes.emplace(ID[0], brickType);
 	}
 }
 
 void Level::createBricks(tinyxml2::XMLElement * level)
 {
-	tinyxml2::XMLElement* bricks = level->FirstChildElement("Bricks");
-	const char* brickLayout = bricks->GetText();
+	tinyxml2::XMLElement* xmlBricks = level->FirstChildElement("Bricks");
+	std::string brickLayout = { xmlBricks->GetText() };
+	brickLayout.erase(std::remove_if(brickLayout.begin(), brickLayout.end(), ::isspace), brickLayout.end());
 
 	float margin = (windowWidth - ((brickWidth + rowSpacing) * columnCount - rowSpacing)) / 2.f;
-	auto brickCount = brickLayout.begin;
-	for (float i = 0; i < columnCount; i++)
+	auto brickCount = brickLayout.begin();
+
+	for (float i = 0; i < rowCount; i++)
 	{
-		for (float y = 0; y < rowCount; y++)
+		for (float y = 0; y < columnCount; y++)
 		{
-			//std::cout << brickLayout[brickCount] << std::endl;
+			if (brickCount == brickLayout.end()) {
+				return; // too many bricks
+			}
 
 			// find brick type by Id in layout
-			//auto brickTypeItr = this->brickTypes.find(brickLayout[brickCount]);
-			//if (brickTypeItr != this->brickTypes.end()) {
-			//	return; // brick type not found
-			//}
-			//
-			//sf::Vector2f position = { margin + i * brickWidth + i * rowSpacing, margin + y * brickHeight + y * columnSpacing };
+			auto brickTypeItr = this->brickTypes.find(*brickCount);
+			if (brickTypeItr == this->brickTypes.end()) {
+				return; // brick type not found
+			}
 
-			//Brick * brick = new Brick(brickTypeItr->second, position);
-			//this->bricks.push_back(brick);
-			brickCount++;
+			sf::Vector2f position = { margin + y * brickWidth + y * columnSpacing, margin + i * brickHeight + i * rowSpacing };
+			Brick * brick = new Brick(brickTypeItr->second, position);
+
+			bricks.push_back(brick);
+			++brickCount;
 		}
 	}
 }
 
 void Level::evaluateBricks()
 {
-	bricks.erase(
-		std::remove_if(
-			bricks.begin(),
-			bricks.end(),
-			[this](const Brick * brick) -> bool {
-				if (brick->isDestroyed()) {
-					increaseScore(brick->getBreakScore());
-					return true;
-				}
-				return false;
-			}
-		),
+	bricks.erase(std::remove_if(bricks.begin(), bricks.end(),
+		[this](const Brick * brick) -> bool {
+		if (brick->isDestroyed()) {
+			increaseScore(brick->getBreakScore());
+			return true;
+		}
+		return false;
+	}
+	),
 		bricks.end()
-	);
+		);
 }

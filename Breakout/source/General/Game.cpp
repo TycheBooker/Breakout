@@ -1,7 +1,7 @@
 #include "Game.h"
 
 Game::Game() :
-	window(sf::VideoMode(windowWidth, windowHeight), "Memory"),
+	window(sf::VideoMode(windowWidth, windowHeight), "Breakout"),
 	stateManager(&window),
 	musicPlayer()
 {

@@ -184,9 +184,6 @@
     </Media>
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="assets\Data\dream.xml">
-      <Filter>Resource Files\Data</Filter>
-    </Xml>
     <Xml Include="assets\Data\Level1.xml">
       <Filter>Resource Files\Data</Filter>
     </Xml>

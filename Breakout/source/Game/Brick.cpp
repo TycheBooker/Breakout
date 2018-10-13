@@ -1,7 +1,8 @@
 #include "Brick.h"
 
 Brick::Brick(BrickType * brickType, sf::Vector2f position) :
-	brickType(brickType)
+	brickType(brickType),
+	hitPoints(brickType->hitPoints)
 {
 	brickSprite.setTexture(brickType->texture);
 	setPosition(position);
@@ -22,7 +23,7 @@ sf::FloatRect Brick::getGlobalBounds()
 
 void Brick::getHit()
 {
-	brickType->hitPoints--;
+	hitPoints--;
 	if (brickType->hitPoints == 0) {
 		brickType->breakSound.play();
 	}
@@ -33,7 +34,7 @@ void Brick::getHit()
 
 bool Brick::isDestroyed() const
 {
-	return brickType->hitPoints <= 0;
+	return hitPoints <= 0;
 }
 
 unsigned Brick::getBreakScore() const

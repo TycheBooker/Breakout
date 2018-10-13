@@ -70,7 +70,6 @@
     <Media Include="assets\Music\251461__joshuaempyre__arcade-music-loop.wav" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="assets\Data\dream.xml" />
     <Xml Include="assets\Data\Level1.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
