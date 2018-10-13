@@ -6,7 +6,8 @@
 Ball::Ball(Paddle * paddle, std::function<void()> loseLife) :
 	ballSprite(AssetManager::getInstance()->getTexture("ball.png")),
 	paddle(paddle),
-	loseLife(loseLife)
+	loseLife(loseLife),
+	onStart(true)
 {
 	setOrigin(ballSprite.getLocalBounds().width / 2.f, ballSprite.getLocalBounds().height / 2.f);
 	restartBall();
@@ -40,7 +41,7 @@ void Ball::update(sf::Time deltaTime)
 		restartBall();
 	}
 
-	if (velocity.y == 0) {
+	if (onStart) {
 		setPosition(paddle->getPosition().x, getPosition().y);
 	}
 }
@@ -53,6 +54,7 @@ sf::FloatRect Ball::getGlobalBounds()
 void Ball::startMoving()
 {
 	velocity = { -ballVelocity, -ballVelocity };
+	onStart = false;
 }
 
 void Ball::setVelocity(sf::Vector2f velocity)
@@ -70,4 +72,5 @@ void Ball::restartBall()
 {
 	velocity = {0, 0};
 	setPosition(windowWidth / 2.f, windowHeight - 100.f - ballSprite.getLocalBounds().height);
+	onStart = true;
 }

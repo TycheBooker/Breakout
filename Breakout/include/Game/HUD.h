@@ -15,8 +15,8 @@ private:
 	virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const;
 	void createLabel(std::string labelText, bool alignLeft);
 
-	TextElement points;
-	TextElement lives;
+	TextElement * points;
+	TextElement * lives;
 	std::vector <TextElement *> HUDElements;
 	float pageMargin;
 

@@ -17,6 +17,7 @@ public:
 	~StateManager();
 
 	void switchScreen(Screen newScreen);
+	void cleanState();
 	void clearScore();
 	void loseLife();
 	void increaseScore(int points);

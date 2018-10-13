@@ -49,6 +49,9 @@
     <Filter Include="Resource Files\Data">
       <UniqueIdentifier>{bdaa5e92-3d57-4122-be50-5f94691ab797}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Sounds">
+      <UniqueIdentifier>{deefb8ce-30aa-4d6c-b3ce-83a155da8892}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\General\Game.cpp">
@@ -172,6 +175,18 @@
     <Image Include="assets\Textures\ball.png">
       <Filter>Resource Files\Textures</Filter>
     </Image>
+    <Image Include="assets\Textures\Bricks\Hard.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="assets\Textures\Bricks\Impenetrable.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="assets\Textures\Bricks\Medium.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="assets\Textures\Bricks\Soft.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="assets\Fonts\AtariClassic-Regular.ttf">
@@ -181,6 +196,27 @@
   <ItemGroup>
     <Media Include="assets\Music\251461__joshuaempyre__arcade-music-loop.wav">
       <Filter>Resource Files\Music</Filter>
+    </Media>
+    <Media Include="assets\Sounds\Break_01.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="assets\Sounds\Break_02.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="assets\Sounds\Break_03.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="assets\Sounds\Hit_01.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="assets\Sounds\Hit_02.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="assets\Sounds\Hit_03.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="assets\Sounds\Hit_04.wav">
+      <Filter>Resource Files\Sounds</Filter>
     </Media>
   </ItemGroup>
   <ItemGroup>

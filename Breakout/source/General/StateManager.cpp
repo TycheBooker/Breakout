@@ -19,14 +19,7 @@ StateManager::~StateManager()
 
 void StateManager::switchScreen(Screen newScreen)
 {
-	if (nextScreen != nullptr)
-	{
-		delete nextScreen;
-		nextScreen = nullptr;
-	}
-
-	switch (newScreen)
-	{
+	switch (newScreen) {
 	case Screen::StartScreen:
 		nextScreen = new StartScreen(this);
 		break;
@@ -40,9 +33,16 @@ void StateManager::switchScreen(Screen newScreen)
 		break;
 	}
 
-	if (nextScreen != nullptr)
-	{
+	if (nextScreen != nullptr) {
 		std::swap(currentScreen, nextScreen);
+	}
+}
+
+void StateManager::cleanState()
+{
+	if (nextScreen != nullptr) {
+		delete nextScreen;
+		nextScreen = nullptr;
 	}
 }
 

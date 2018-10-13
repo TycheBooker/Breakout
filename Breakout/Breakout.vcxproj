@@ -63,11 +63,22 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\Textures\ball.png" />
+    <Image Include="assets\Textures\Bricks\Hard.png" />
+    <Image Include="assets\Textures\Bricks\Impenetrable.png" />
+    <Image Include="assets\Textures\Bricks\Medium.png" />
+    <Image Include="assets\Textures\Bricks\Soft.png" />
     <Image Include="assets\Textures\paddle.png" />
     <Image Include="assets\Textures\soft.png" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="assets\Music\251461__joshuaempyre__arcade-music-loop.wav" />
+    <Media Include="assets\Sounds\Break_01.wav" />
+    <Media Include="assets\Sounds\Break_02.wav" />
+    <Media Include="assets\Sounds\Break_03.wav" />
+    <Media Include="assets\Sounds\Hit_01.wav" />
+    <Media Include="assets\Sounds\Hit_02.wav" />
+    <Media Include="assets\Sounds\Hit_03.wav" />
+    <Media Include="assets\Sounds\Hit_04.wav" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="assets\Data\Level1.xml" />

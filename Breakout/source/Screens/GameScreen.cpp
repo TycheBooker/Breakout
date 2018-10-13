@@ -20,17 +20,15 @@ GameScreen::~GameScreen()
 
 void GameScreen::renderScreen(sf::RenderWindow & window)
 {
-	for (size_t i = 0; i < gameObjects.size(); i++)
-	{
-		window.draw(*gameObjects[i]);
+	for (auto & object : gameObjects) {
+		window.draw(*object);
 	}
 }
 
 void GameScreen::updateScreen(sf::Time deltaTime)
 {
-	for (size_t i = 0; i < gameObjects.size(); i++)
-	{
-		gameObjects[i]->update(deltaTime);
+	for (auto & object : gameObjects) {
+		object->update(deltaTime);
 	}
 	paddle.paddleCollision(ball);
 	level.brickCollision(ball);

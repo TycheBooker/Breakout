@@ -17,20 +17,19 @@ void Game::run()
 	sf::Clock clock;
 	musicPlayer.playMusic();
 	stateManager.switchScreen(Screen::StartScreen);
-	while (window.isOpen())
-	{
+	while (window.isOpen()) {
 		sf::Time deltaTime = clock.restart();
 		processInput();
 		update(deltaTime);
 		render();
+		stateManager.cleanState();
 	}
 }
 
 void Game::processInput()
 {
 	sf::Event event;
-	while (window.pollEvent(event))
-	{
+	while (window.pollEvent(event)) {
 		if ((event.type == sf::Event::Closed) ||
 			(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
 			window.close();

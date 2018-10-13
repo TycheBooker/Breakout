@@ -32,9 +32,11 @@ private:
 	sf::Texture backgroundTexture;
 	sf::RectangleShape background;
 
-	int rowCount = 3;
-	int columnCount = 20;
-	int rowSpacing = 3;
-	int columnSpacing = 3;
+	int rowCount;
+	int columnCount;
+	int rowSpacing;
+	int columnSpacing;
+	int brickWidth;
+	int brickHeight;
 };
 

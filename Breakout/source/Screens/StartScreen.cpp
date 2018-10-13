@@ -13,8 +13,8 @@ StartScreen::StartScreen(StateManager * stateManager) :
 
 StartScreen::~StartScreen()
 {
-	for (auto & element : pageElements) {
-		delete element;
+	for (auto & itr : pageElements) {
+		delete itr;
 	}
 	pageElements.clear();
 }

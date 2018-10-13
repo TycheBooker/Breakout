@@ -9,7 +9,7 @@ EndScreen::EndScreen(StateManager * stateManager) :
 		createTitle("You died!");
 	}
 	else {
-		createTitle("GZ! You escaped!");
+		createTitle("GZ! You\nescaped!");
 	}
 	std::string scoreText = "Your score: " + std::to_string(stateManager->getScore());
 	createLabel(scoreText);
@@ -19,18 +19,16 @@ EndScreen::EndScreen(StateManager * stateManager) :
 
 EndScreen::~EndScreen()
 {
-	for (size_t i = 0; i < pageElements.size(); i++)
-	{
-		delete pageElements[i];
+	for (auto & itr : pageElements) {
+		delete itr;
 	}
 	pageElements.clear();
 }
 
 void EndScreen::renderScreen(sf::RenderWindow & window)
 {
-	for (size_t i = 0; i < pageElements.size(); i++)
-	{
-		window.draw(*pageElements[i]);
+	for (auto & element : pageElements) {
+		window.draw(*element);
 	}
 }
 
@@ -62,10 +60,9 @@ void EndScreen::createLabel(std::string labelText)
 	TextElement * label = new TextElement(labelText);
 	label->centerText();
 	float pageElementsHeight = pageMargin;
-	for (size_t i = 0; i < pageElements.size(); i++)
-	{
-		pageElementsHeight += pageElements[i]->getSize().y;
-		pageElementsHeight += pageElements[i]->getMarginBottom();
+	for (auto & element : pageElements) {
+		pageElementsHeight += element->getSize().y;
+		pageElementsHeight += element->getMarginBottom();
 	}
 	label->move(0, pageElementsHeight);
 	pageElements.push_back(label);

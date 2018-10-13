@@ -6,11 +6,19 @@
 Level::Level(std::function<void(int)> increaseScore) :
 	increaseScore(increaseScore)
 {
-	loadLevel("assets/data/Level1");
+	loadLevel("assets/data/Level1.xml");
 }
 
 Level::~Level()
 {
+	for (auto & itr : bricks) {
+		delete itr;
+	}
+	bricks.clear();
+	for (auto & itr : brickTypes) {
+		delete itr.second;
+	}
+	brickTypes.clear();
 }
 
 void Level::update(sf::Time deltaTime)
@@ -26,8 +34,8 @@ void Level::brickCollision(Ball & ball)
 
 	for (auto & brick : bricks) {
 		sf::FloatRect brickBounds = brick->getGlobalBounds();
-
 		if (!brickBounds.intersects(ballBounds)) continue;
+
 		brick->getHit();
 
 		// intersection amount by directions
@@ -45,10 +53,12 @@ void Level::brickCollision(Ball & ball)
 		float intersectY = hitTop ? intersectTop : intersectBottom;
 
 		// change velocity by hit direction
-		if (abs(intersectX) < abs(intersectY))
+		if (abs(intersectX) < abs(intersectY)) {
 			ball.velocity.x = hitLeft ? -ballVelocity : ballVelocity;
-		else
+		}
+		else {
 			ball.velocity.y = hitTop ? -ballVelocity : ballVelocity;
+		}
 	}
 
 	evaluateBricks();
@@ -71,14 +81,16 @@ void Level::draw(sf::RenderTarget & target, sf::RenderStates states) const
 void Level::loadLevel(std::string levelPath)
 {
 	tinyxml2::XMLDocument doc;
-	doc.LoadFile("assets/Data/Level1.xml");
+	doc.LoadFile("assets/data/Level1.xml");
 	tinyxml2::XMLElement * level = doc.FirstChildElement("Level");
+
+	if (doc.ErrorID()) {
+		return;
+	}
 
 	setLevelAttributes(level);
 	createBrickTypes(level);
 	createBricks(level);
-
-	//return doc.ErrorID();
 }
 
 void Level::setLevelAttributes(tinyxml2::XMLElement * level)
@@ -90,6 +102,8 @@ void Level::setLevelAttributes(tinyxml2::XMLElement * level)
 	level->QueryIntAttribute("RowSpacing", &rowSpacing);
 	level->QueryIntAttribute("ColumnSpacing", &columnSpacing);
 	level->QueryStringAttribute("BackgroundTexture", &backgroundTexture);
+	level->QueryIntAttribute("BrickWidth", &brickWidth);
+	level->QueryIntAttribute("BrickHeight", &brickHeight);
 
 	this->backgroundTexture = AssetManager::getInstance()->getTexture(backgroundTexture);
 	background.setTexture(&this->backgroundTexture);
@@ -127,10 +141,8 @@ void Level::createBricks(tinyxml2::XMLElement * level)
 	float margin = (windowWidth - ((brickWidth + rowSpacing) * columnCount - rowSpacing)) / 2.f;
 	auto brickCount = brickLayout.begin();
 
-	for (float i = 0; i < rowCount; i++)
-	{
-		for (float y = 0; y < columnCount; y++)
-		{
+	for (float i = 0; i < rowCount; i++) {
+		for (float y = 0; y < columnCount; y++) {
 			if (brickCount == brickLayout.end()) {
 				return; // too many bricks
 			}

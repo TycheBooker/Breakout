@@ -13,5 +13,3 @@ constexpr char audioPath[] = "assets/Sounds/";
 // Game Settings
 constexpr float ballVelocity = 6.f;
 constexpr float paddleVelocity = 6.f;
-constexpr int brickWidth = 32;
-constexpr int brickHeight = 16;

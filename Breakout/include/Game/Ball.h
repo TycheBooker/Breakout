@@ -24,5 +24,6 @@ private:
 
 	Paddle * paddle;
 	sf::Sprite ballSprite;
+	bool onStart;
 };
 

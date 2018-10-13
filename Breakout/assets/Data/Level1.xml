@@ -5,6 +5,8 @@
   ColumnCount="20"
   RowSpacing="3"
   ColumnSpacing="3"
+  BrickWidth="32"
+  BrickHeight="16"
   BackgroundTexture="Boards/Board_01.dds">
 
   <BrickTypes>

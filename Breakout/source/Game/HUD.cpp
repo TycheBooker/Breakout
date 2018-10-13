@@ -3,20 +3,24 @@
 
 HUD::HUD(StateManager * stateManager) :
 	stateManager(stateManager),
-	points(std::to_string(stateManager->getScore())),
-	lives(std::to_string(stateManager->getLives())),
+	points(new TextElement(std::to_string(stateManager->getScore()))),
+	lives(new TextElement(std::to_string(stateManager->getLives()))),
 	pageMargin(50.f)
 {
 	createLabel("Points:", false);
 	createLabel("Lives:", true);	
-	points.setPosition(windowWidth - pageMargin - points.getSize().x - 100.f, windowHeight - pageMargin);
-	lives.setPosition(pageMargin, windowHeight - pageMargin);
-	HUDElements.push_back(&points);
-	HUDElements.push_back(&lives);
+	points->setPosition(windowWidth - pageMargin - points->getSize().x, windowHeight - pageMargin);
+	lives->setPosition(pageMargin, windowHeight - pageMargin);
+	HUDElements.push_back(points);
+	HUDElements.push_back(lives);
 }
 
 HUD::~HUD()
 {
+	for (auto & itr : HUDElements) {
+		delete itr;
+	}
+	HUDElements.clear();
 }
 
 void HUD::update(sf::Time deltaTime)
@@ -24,11 +28,12 @@ void HUD::update(sf::Time deltaTime)
 	for (auto & element : HUDElements) {
 		element->update(deltaTime);
 	}
-	if (points.getText() != std::to_string(stateManager->getScore())) {
-		points.setText(std::to_string(stateManager->getScore()));
+	if (points->getText() != std::to_string(stateManager->getScore())) {
+		points->setText(std::to_string(stateManager->getScore()));
+		points->setPosition(windowWidth - pageMargin - points->getSize().x, windowHeight - pageMargin);
 	}
-	if (lives.getText() != std::to_string(stateManager->getLives())) {
-		lives.setText(std::to_string(stateManager->getLives()));
+	if (lives->getText() != std::to_string(stateManager->getLives())) {
+		lives->setText(std::to_string(stateManager->getLives()));
 	}
 }
 
