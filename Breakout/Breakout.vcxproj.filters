@@ -284,4 +284,7 @@
       <Filter>Resource Files\Data</Filter>
     </Xml>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\assets.md" />
+  </ItemGroup>
 </Project>
