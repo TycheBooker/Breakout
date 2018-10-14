@@ -1,12 +1,13 @@
 #include <algorithm>
+#include <iostream>
 #include "Level.h"
 #include "Settings.h"
-#include <iostream>
 
 Level::Level(std::function<void(int)> increaseScore) :
-	increaseScore(increaseScore)
+	increaseScore(increaseScore),
+	nextLevel()
 {
-	loadLevel("assets/data/Level1.xml");
+	loadLevel("Assets/Data/Level1.xml");
 }
 
 Level::~Level()
@@ -64,9 +65,22 @@ void Level::brickCollision(Ball & ball)
 	evaluateBricks();
 }
 
+bool Level::loadNext()
+{
+	if (nextLevel.size() == 0) return false;
+
+	loadLevel(nextLevel);
+	return true;
+}
+
 bool Level::isFinnished()
 {
-	return bricks.size() == 0;
+	if (bricks.size() == 0) return true;
+
+	for (auto & brick : bricks) {
+		if (!brick->isImpenetrable()) return false;
+	}
+	return true;
 }
 
 void Level::draw(sf::RenderTarget & target, sf::RenderStates states) const
@@ -81,12 +95,14 @@ void Level::draw(sf::RenderTarget & target, sf::RenderStates states) const
 void Level::loadLevel(std::string levelPath)
 {
 	tinyxml2::XMLDocument doc;
-	doc.LoadFile("assets/data/Level1.xml");
-	tinyxml2::XMLElement * level = doc.FirstChildElement("Level");
+	doc.LoadFile(levelPath.c_str());
 
 	if (doc.ErrorID()) {
+		std::cerr << "Failed loading the path file: " << levelPath << " !" << std::endl;
 		return;
 	}
+
+	tinyxml2::XMLElement * level = doc.FirstChildElement("Level");
 
 	setLevelAttributes(level);
 	createBrickTypes(level);
@@ -95,7 +111,8 @@ void Level::loadLevel(std::string levelPath)
 
 void Level::setLevelAttributes(tinyxml2::XMLElement * level)
 {
-	const char * backgroundTexture;
+	const char * backgroundTexture = nullptr;
+	const char * nextLevel = nullptr;
 
 	level->QueryIntAttribute("RowCount", &rowCount);
 	level->QueryIntAttribute("ColumnCount", &columnCount);
@@ -104,21 +121,30 @@ void Level::setLevelAttributes(tinyxml2::XMLElement * level)
 	level->QueryStringAttribute("BackgroundTexture", &backgroundTexture);
 	level->QueryIntAttribute("BrickWidth", &brickWidth);
 	level->QueryIntAttribute("BrickHeight", &brickHeight);
+	level->QueryStringAttribute("NextLevel", &nextLevel);
 
-	this->backgroundTexture = AssetManager::getInstance()->getTexture(backgroundTexture);
-	background.setTexture(&this->backgroundTexture);
+	if (backgroundTexture != nullptr) {
+		this->backgroundTexture = AssetManager::getInstance()->getTexture(backgroundTexture);
+		background.setTexture(&this->backgroundTexture);
+	}
+	if (nextLevel != nullptr) {
+		this->nextLevel = { nextLevel };
+	}
+	else {
+		this->nextLevel = {};
+	}
 }
 
 void Level::createBrickTypes(tinyxml2::XMLElement * level)
 {
 	tinyxml2::XMLElement * xmlBrickTypes = level->FirstChildElement("BrickTypes");
 	for (auto * xmlBrickType = xmlBrickTypes->FirstChildElement("BrickType"); xmlBrickType; xmlBrickType = xmlBrickType->NextSiblingElement("BrickType")) {
-		const char * ID;
-		int hitPoints;
-		int breakScore;
-		const char * texture;
-		const char * hitSound;
-		const char * breakSound;
+		const char * ID = "";
+		int hitPoints = 0;
+		int breakScore = 0;
+		const char * texture = "";
+		const char * hitSound = "";
+		const char * breakSound = "";
 
 		xmlBrickType->QueryStringAttribute("Id", &ID);
 		xmlBrickType->QueryIntAttribute("HitPoints", &hitPoints);
@@ -144,13 +170,21 @@ void Level::createBricks(tinyxml2::XMLElement * level)
 	for (float i = 0; i < rowCount; i++) {
 		for (float y = 0; y < columnCount; y++) {
 			if (brickCount == brickLayout.end()) {
-				return; // too many bricks
+				std::cerr << "There are more bricks in the layout than defined in the level attributes!" << std::endl;
+				return;
+			}
+
+			// skip brick generation if _ in layout
+			if (*brickCount == '_') {
+				++brickCount;
+				continue;
 			}
 
 			// find brick type by Id in layout
 			auto brickTypeItr = this->brickTypes.find(*brickCount);
 			if (brickTypeItr == this->brickTypes.end()) {
-				return; // brick type not found
+				std::cerr << "Undefined brick type found in bricks!" << std::endl;
+				return;
 			}
 
 			sf::Vector2f position = { margin + y * brickWidth + y * columnSpacing, margin + i * brickHeight + i * rowSpacing };
@@ -160,6 +194,15 @@ void Level::createBricks(tinyxml2::XMLElement * level)
 			++brickCount;
 		}
 	}
+}
+
+tinyxml2::XMLError Level::
+checkXMLResult(tinyxml2::XMLError result)
+{
+	if (result != tinyxml2::XML_SUCCESS) {
+		std::cerr << "Error while reading xml: " << result << " !" << std::endl;
+	}
+	return result;
 }
 
 void Level::evaluateBricks()

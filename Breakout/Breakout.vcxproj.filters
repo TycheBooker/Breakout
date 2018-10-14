@@ -223,5 +223,8 @@
     <Xml Include="assets\Data\Level1.xml">
       <Filter>Resource Files\Data</Filter>
     </Xml>
+    <Xml Include="assets\Data\Level2.xml">
+      <Filter>Resource Files\Data</Filter>
+    </Xml>
   </ItemGroup>
 </Project>

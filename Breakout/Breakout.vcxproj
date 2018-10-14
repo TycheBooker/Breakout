@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="assets\Data\Level1.xml" />
+    <Xml Include="assets\Data\Level2.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{641A5EFD-3F82-44C6-85BE-5676324C29DF}</ProjectGuid>

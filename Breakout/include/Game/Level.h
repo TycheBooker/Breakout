@@ -17,6 +17,7 @@ public:
 	virtual void update(sf::Time deltaTime);
 
 	void brickCollision(Ball & ball);
+	bool loadNext();
 	bool isFinnished();
 private:
 	virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const;
@@ -24,6 +25,8 @@ private:
 	void setLevelAttributes(tinyxml2::XMLElement * level);
 	void createBrickTypes(tinyxml2::XMLElement * level);
 	void createBricks(tinyxml2::XMLElement * level);
+	tinyxml2::XMLError checkXMLResult(tinyxml2::XMLError result);
+
 	void evaluateBricks();
 	std::function<void(int)> increaseScore;
 
@@ -38,5 +41,6 @@ private:
 	int columnSpacing;
 	int brickWidth;
 	int brickHeight;
+	std::string nextLevel;
 };
 

@@ -23,6 +23,8 @@ sf::FloatRect Brick::getGlobalBounds()
 
 void Brick::getHit()
 {
+	if (hitPoints < 0) return;
+
 	hitPoints--;
 	if (brickType->hitPoints == 0) {
 		brickType->breakSound.play();
@@ -34,7 +36,12 @@ void Brick::getHit()
 
 bool Brick::isDestroyed() const
 {
-	return hitPoints <= 0;
+	return hitPoints == 0;
+}
+
+bool Brick::isImpenetrable()
+{
+	return hitPoints < 0;
 }
 
 unsigned Brick::getBreakScore() const

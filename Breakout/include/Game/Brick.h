@@ -6,11 +6,18 @@ struct BrickType {
 	BrickType(char ID, int hitPoints, int breakScore, std::string texturePath, std::string hitSound, std::string breakSound) :
 		ID(ID),
 		hitPoints(hitPoints),
-		breakScore(breakScore),
-		texture(AssetManager::getInstance()->getTexture(texturePath)),
-		hitSound(AssetManager::getInstance()->getSoundBuffer(hitSound)),
-		breakSound(AssetManager::getInstance()->getSoundBuffer(breakSound))
-	{}
+		breakScore(breakScore)
+	{
+		if (texturePath != "") {
+			this->texture = AssetManager::getInstance()->getTexture(texturePath);
+		}
+		if (hitSound != "") {
+			this->hitSound = sf::Sound(AssetManager::getInstance()->getSoundBuffer(hitSound));
+		}
+		if (breakSound != "") {
+			this->breakSound = sf::Sound(AssetManager::getInstance()->getSoundBuffer(breakSound));
+		}
+	}
 
 	const char ID;
 	const int hitPoints;
@@ -30,6 +37,7 @@ public:
 	sf::FloatRect getGlobalBounds();
 	void getHit();
 	bool isDestroyed() const;
+	bool isImpenetrable();
 	unsigned getBreakScore() const;
 private:
 	virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const;

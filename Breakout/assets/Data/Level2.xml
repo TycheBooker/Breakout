@@ -7,8 +7,7 @@
   ColumnSpacing="3"
   BrickWidth="32"
   BrickHeight="16"
-  BackgroundTexture="Boards/Board_01.dds"
-  NextLevel="Assets/Data/Level2.xml">
+  BackgroundTexture="Boards/Board_01.dds">
 
   <BrickTypes>
     <!-- Soft Brick -->
@@ -44,8 +43,8 @@
 
   </BrickTypes>
   <Bricks>
-    ____________________
-    __II____________II__
-    _______S____________
+    HHHHHHHHHHHHHHHHHHHH
+    MMIIMMMMMMMMMMMMIIMM
+    SSSSSSSSSSSSSSSSSSSS
   </Bricks>
 </Level>

@@ -32,7 +32,7 @@ void GameScreen::updateScreen(sf::Time deltaTime)
 	}
 	paddle.paddleCollision(ball);
 	level.brickCollision(ball);
-	if (level.isFinnished()) {
+	if (level.isFinnished() && !level.loadNext()) {
 		finishGame();
 	}
 }
