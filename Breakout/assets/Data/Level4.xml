@@ -2,19 +2,19 @@
 
 <Level
   RowCount="13"
-  ColumnCount="15"
+  ColumnCount="19"
   RowSpacing="3"
   ColumnSpacing="3"
   BrickWidth="32"
   BrickHeight="16"
-  BackgroundTexture="Boards/Board_05.png"
-  NextLevel="Assets/Data/Level3.xml">
+  BackgroundTexture="Boards/Board_04.png"
+  NextLevel="Assets/Data/Level5.xml">
 
   <BrickTypes>
     <!-- Soft Brick -->
     <BrickType
       Id="S"
-      Texture="Bricks/Yellow.png"
+      Texture="Bricks/Blue.png"
       HitPoints="1"
       HitSound="Hit_01.wav"
       BreakSound="Break_01.wav"
@@ -22,7 +22,7 @@
     <!-- Medium Brick -->
     <BrickType
       Id="M"
-      Texture="Bricks/Red.png"
+      Texture="Bricks/Green.png"
       HitPoints="2"
       HitSound="Hit_02.wav"
       BreakSound="Break_02.wav"
@@ -30,40 +30,32 @@
     <!-- Hard Brick -->
     <BrickType
       Id="H"
-      Texture="Bricks/Blue.png"
+      Texture="Bricks/Red.png"
       HitPoints="3"
       HitSound="Hit_03.wav"
       BreakSound="Break_03.wav"
       BreakScore="150" />
-    <!-- Very Hard Brick -->
-    <BrickType
-      Id="V"
-      Texture="Bricks/Silver.png"
-      HitPoints="4"
-      HitSound="Hit_05.wav"
-      BreakSound="Break_04.wav"
-      BreakScore="200" />
     <!-- Impenetrable Brick -->
     <BrickType
       Id="I"
-      Texture="Bricks/Gold-Grey.png"
+      Texture="Bricks/Grey-Green.png"
       HitPoints="-1"
       HitSound="Hit_04.wav" />
 
   </BrickTypes>
   <Bricks>
-    _________SSS___
-    __MM____SSSSS__
-    _MMMM___SSSSSS_
-    MMMMMM_SSSSSSS_
-    MVVMVV_SSSSSS__
-    MVHMVH_SSSSS___
-    MVVMVV_SSSS___I
-    MMMMMM_SSSSS___
-    MMMMMM_SSSSSS__
-    MMMMMM_SSSSSSS_
-    M_MM_M__SSSSSS_
-    M_MM_M__SSSSS__
-    M_MM_M___SSS___
+    HHHHHSSSSSSSSSHHHHH
+    HIIIHMMMMMMMMMHIIIH
+    HHHHHSSSSMSSSSHHHHH
+    SSMSS___SMS___SSMSS
+    SSMSS__HHHHH__SSMSS
+    SSMSSSSHHIHHSSSSMSS
+    SSMMMMMHIIIHMMMMMSS
+    SSMSSSSHHIHHSSSSMSS
+    SSMSS__HHHHH__SSMSS
+    SSMSS___SMS___SSMSS
+    HHHHHSSSSMSSSSHHHHH
+    HIIIHMMMMMMMMMHIIIH
+    HHHHHSSSSSSSSSHHHHH
   </Bricks>
 </Level>

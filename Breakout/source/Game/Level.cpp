@@ -12,14 +12,7 @@ Level::Level(std::function<void(int)> increaseScore) :
 
 Level::~Level()
 {
-	for (auto & itr : bricks) {
-		delete itr;
-	}
-	bricks.clear();
-	for (auto & itr : brickTypes) {
-		delete itr.second;
-	}
-	brickTypes.clear();
+	clearLevel();
 }
 
 void Level::update(sf::Time deltaTime)
@@ -68,7 +61,7 @@ void Level::brickCollision(Ball & ball)
 bool Level::loadNext()
 {
 	if (nextLevel.size() == 0) return false;
-
+	clearLevel();
 	loadLevel(nextLevel);
 	return true;
 }
@@ -107,6 +100,18 @@ void Level::loadLevel(std::string levelPath)
 	setLevelAttributes(level);
 	createBrickTypes(level);
 	createBricks(level);
+}
+
+void Level::clearLevel()
+{
+	for (auto & itr : bricks) {
+		delete itr;
+	}
+	bricks.clear();
+	for (auto & itr : brickTypes) {
+		delete itr.second;
+	}
+	brickTypes.clear();
 }
 
 void Level::setLevelAttributes(tinyxml2::XMLElement * level)
@@ -186,7 +191,7 @@ void Level::createBricks(tinyxml2::XMLElement * level)
 				return;
 			}
 
-			sf::Vector2f position = { margin + y * brickWidth + y * columnSpacing, margin + i * brickHeight + i * rowSpacing };
+			sf::Vector2f position = { margin + y * brickWidth + y * columnSpacing, 50.f + i * brickHeight + i * rowSpacing };
 			Brick * brick = new Brick(brickTypeItr->second, position);
 
 			bricks.push_back(brick);

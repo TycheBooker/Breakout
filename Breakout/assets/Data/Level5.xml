@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <Level
-  RowCount="3"
-  ColumnCount="20"
+  RowCount="16"
+  ColumnCount="14"
   RowSpacing="3"
   ColumnSpacing="3"
   BrickWidth="32"
   BrickHeight="16"
-  BackgroundTexture="Boards/Board_01.png"
-  NextLevel="Assets/Data/Level2.xml">
+  BackgroundTexture="Boards/Board_02.png">
 
   <BrickTypes>
     <!-- Soft Brick -->
     <BrickType
       Id="S"
-      Texture="Bricks/Blue.png"
+      Texture="Bricks/Green.png"
       HitPoints="1"
       HitSound="Hit_01.wav"
       BreakSound="Break_01.wav"
@@ -22,19 +21,11 @@
     <!-- Medium Brick -->
     <BrickType
       Id="M"
-      Texture="Bricks/Green.png"
+      Texture="Bricks/Red.png"
       HitPoints="2"
       HitSound="Hit_02.wav"
       BreakSound="Break_02.wav"
       BreakScore="100" />
-    <!-- Hard Brick -->
-    <BrickType
-      Id="H"
-      Texture="Bricks/Red.png"
-      HitPoints="3"
-      HitSound="Hit_03.wav"
-      BreakSound="Break_03.wav"
-      BreakScore="150" />
     <!-- Impenetrable Brick -->
     <BrickType
       Id="I"
@@ -44,8 +35,21 @@
 
   </BrickTypes>
   <Bricks>
-    HHHHHHHHHHHHHHHHHHHH
-    MMIIMMMMMMMMMMMMIIMM
-    SSSSSSSSSSSSSSSSSSSS
+    SSSSSSSSSSSSSS
+    SSSSSSSSSSSSSS
+    ______SS______
+    ______SS______
+    MMMMM_SS_MMMMM
+    M___M_SS_M___M
+    M_I_M____M_I_M
+    M_I_MMMMMM_I_M
+    M_I_MMMMMM_I_M
+    M_I_M____M_I_M
+    M___M_SS_M___M
+    MMMMM_SS_MMMMM
+    ______SS______
+    ______SS______
+    SSSSSSSSSSSSSS
+    SSSSSSSSSSSSSS
   </Bricks>
 </Level>

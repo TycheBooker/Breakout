@@ -44,10 +44,11 @@ void Paddle::paddleCollision(Ball & ball)
 	float intersectTop = ballBounds.top + ballBounds.height - paddleBounds.top;
 	float intersectBottom = paddleBounds.top + paddleBounds.height - ballBounds.top;
 
-	if (abs(intersectTop) > abs(intersectBottom)) return;      // bottom hit
+	if (abs(intersectTop) > abs(intersectBottom)) return;      // don't count bottom hit
 
 	ball.velocity.y = -ballVelocity;
 
+	// different bounce direction for left and right paddle sides
 	if (getPosition().x < ball.getPosition().x) {
 		ball.velocity.x = ballVelocity;
 	}

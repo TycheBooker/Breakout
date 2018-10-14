@@ -22,6 +22,7 @@ public:
 private:
 	virtual void draw(sf::RenderTarget & target, sf::RenderStates states) const;
 	void loadLevel(std::string levelPath);
+	void clearLevel();
 	void setLevelAttributes(tinyxml2::XMLElement * level);
 	void createBrickTypes(tinyxml2::XMLElement * level);
 	void createBricks(tinyxml2::XMLElement * level);

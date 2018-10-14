@@ -63,25 +63,42 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\Textures\ball.png" />
-    <Image Include="assets\Textures\Bricks\Hard.png" />
-    <Image Include="assets\Textures\Bricks\Impenetrable.png" />
-    <Image Include="assets\Textures\Bricks\Medium.png" />
-    <Image Include="assets\Textures\Bricks\Soft.png" />
+    <Image Include="assets\Textures\Boards\Board_01.png" />
+    <Image Include="assets\Textures\Boards\Board_02.png" />
+    <Image Include="assets\Textures\Boards\Board_03.png" />
+    <Image Include="assets\Textures\Boards\Board_04.png" />
+    <Image Include="assets\Textures\Boards\Board_05.png" />
+    <Image Include="assets\Textures\Bricks\Blue.png" />
+    <Image Include="assets\Textures\Bricks\Bronze.png" />
+    <Image Include="assets\Textures\Bricks\Gold-Grey.png" />
+    <Image Include="assets\Textures\Bricks\Gold.png" />
+    <Image Include="assets\Textures\Bricks\Green.png" />
+    <Image Include="assets\Textures\Bricks\Grey-Green.png" />
+    <Image Include="assets\Textures\Bricks\Grey.png" />
+    <Image Include="assets\Textures\Bricks\Purple-Blue.png" />
+    <Image Include="assets\Textures\Bricks\Purple.png" />
+    <Image Include="assets\Textures\Bricks\Red.png" />
+    <Image Include="assets\Textures\Bricks\Silver.png" />
+    <Image Include="assets\Textures\Bricks\Yellow.png" />
     <Image Include="assets\Textures\paddle.png" />
-    <Image Include="assets\Textures\soft.png" />
   </ItemGroup>
   <ItemGroup>
-    <Media Include="assets\Music\251461__joshuaempyre__arcade-music-loop.wav" />
+    <Media Include="assets\Music\BreakoutMusic.wav" />
     <Media Include="assets\Sounds\Break_01.wav" />
     <Media Include="assets\Sounds\Break_02.wav" />
     <Media Include="assets\Sounds\Break_03.wav" />
+    <Media Include="assets\Sounds\Break_04.wav" />
     <Media Include="assets\Sounds\Hit_01.wav" />
     <Media Include="assets\Sounds\Hit_02.wav" />
     <Media Include="assets\Sounds\Hit_03.wav" />
     <Media Include="assets\Sounds\Hit_04.wav" />
+    <Media Include="assets\Sounds\Hit_05.wav" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="assets\Data\Level1.xml" />
+    <Xml Include="assets\Data\Level5.xml" />
+    <Xml Include="assets\Data\Level3.xml" />
+    <Xml Include="assets\Data\Level4.xml" />
     <Xml Include="assets\Data\Level2.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

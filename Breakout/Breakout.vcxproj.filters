@@ -52,6 +52,12 @@
     <Filter Include="Resource Files\Sounds">
       <UniqueIdentifier>{deefb8ce-30aa-4d6c-b3ce-83a155da8892}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Textures\Boards">
+      <UniqueIdentifier>{12b676d3-bf2c-4639-8731-7bf9f3959b3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Textures\Bricks">
+      <UniqueIdentifier>{7764b4a8-549f-4b54-b21e-873c1bf84097}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\General\Game.cpp">
@@ -166,26 +172,62 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="assets\Textures\soft.png">
-      <Filter>Resource Files\Textures</Filter>
-    </Image>
     <Image Include="assets\Textures\paddle.png">
       <Filter>Resource Files\Textures</Filter>
     </Image>
     <Image Include="assets\Textures\ball.png">
       <Filter>Resource Files\Textures</Filter>
     </Image>
-    <Image Include="assets\Textures\Bricks\Hard.png">
-      <Filter>Resource Files\Textures</Filter>
+    <Image Include="assets\Textures\Bricks\Blue.png">
+      <Filter>Resource Files\Textures\Bricks</Filter>
     </Image>
-    <Image Include="assets\Textures\Bricks\Impenetrable.png">
-      <Filter>Resource Files\Textures</Filter>
+    <Image Include="assets\Textures\Boards\Board_01.png">
+      <Filter>Resource Files\Textures\Boards</Filter>
     </Image>
-    <Image Include="assets\Textures\Bricks\Medium.png">
-      <Filter>Resource Files\Textures</Filter>
+    <Image Include="assets\Textures\Boards\Board_02.png">
+      <Filter>Resource Files\Textures\Boards</Filter>
     </Image>
-    <Image Include="assets\Textures\Bricks\Soft.png">
-      <Filter>Resource Files\Textures</Filter>
+    <Image Include="assets\Textures\Boards\Board_03.png">
+      <Filter>Resource Files\Textures\Boards</Filter>
+    </Image>
+    <Image Include="assets\Textures\Boards\Board_04.png">
+      <Filter>Resource Files\Textures\Boards</Filter>
+    </Image>
+    <Image Include="assets\Textures\Boards\Board_05.png">
+      <Filter>Resource Files\Textures\Boards</Filter>
+    </Image>
+    <Image Include="assets\Textures\Bricks\Bronze.png">
+      <Filter>Resource Files\Textures\Bricks</Filter>
+    </Image>
+    <Image Include="assets\Textures\Bricks\Gold.png">
+      <Filter>Resource Files\Textures\Bricks</Filter>
+    </Image>
+    <Image Include="assets\Textures\Bricks\Gold-Grey.png">
+      <Filter>Resource Files\Textures\Bricks</Filter>
+    </Image>
+    <Image Include="assets\Textures\Bricks\Green.png">
+      <Filter>Resource Files\Textures\Bricks</Filter>
+    </Image>
+    <Image Include="assets\Textures\Bricks\Grey.png">
+      <Filter>Resource Files\Textures\Bricks</Filter>
+    </Image>
+    <Image Include="assets\Textures\Bricks\Grey-Green.png">
+      <Filter>Resource Files\Textures\Bricks</Filter>
+    </Image>
+    <Image Include="assets\Textures\Bricks\Purple.png">
+      <Filter>Resource Files\Textures\Bricks</Filter>
+    </Image>
+    <Image Include="assets\Textures\Bricks\Purple-Blue.png">
+      <Filter>Resource Files\Textures\Bricks</Filter>
+    </Image>
+    <Image Include="assets\Textures\Bricks\Red.png">
+      <Filter>Resource Files\Textures\Bricks</Filter>
+    </Image>
+    <Image Include="assets\Textures\Bricks\Silver.png">
+      <Filter>Resource Files\Textures\Bricks</Filter>
+    </Image>
+    <Image Include="assets\Textures\Bricks\Yellow.png">
+      <Filter>Resource Files\Textures\Bricks</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -194,9 +236,6 @@
     </Font>
   </ItemGroup>
   <ItemGroup>
-    <Media Include="assets\Music\251461__joshuaempyre__arcade-music-loop.wav">
-      <Filter>Resource Files\Music</Filter>
-    </Media>
     <Media Include="assets\Sounds\Break_01.wav">
       <Filter>Resource Files\Sounds</Filter>
     </Media>
@@ -218,12 +257,30 @@
     <Media Include="assets\Sounds\Hit_04.wav">
       <Filter>Resource Files\Sounds</Filter>
     </Media>
+    <Media Include="assets\Music\BreakoutMusic.wav">
+      <Filter>Resource Files\Music</Filter>
+    </Media>
+    <Media Include="assets\Sounds\Break_04.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
+    <Media Include="assets\Sounds\Hit_05.wav">
+      <Filter>Resource Files\Sounds</Filter>
+    </Media>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="assets\Data\Level1.xml">
       <Filter>Resource Files\Data</Filter>
     </Xml>
+    <Xml Include="assets\Data\Level3.xml">
+      <Filter>Resource Files\Data</Filter>
+    </Xml>
+    <Xml Include="assets\Data\Level4.xml">
+      <Filter>Resource Files\Data</Filter>
+    </Xml>
     <Xml Include="assets\Data\Level2.xml">
+      <Filter>Resource Files\Data</Filter>
+    </Xml>
+    <Xml Include="assets\Data\Level5.xml">
       <Filter>Resource Files\Data</Filter>
     </Xml>
   </ItemGroup>
