@@ -42,9 +42,10 @@ void GameScreen::handleInput(sf::Event event)
 	if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Space)) {
 		ball.startMoving();
 	}
-	if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Enter)) {
-		finishGame();
-	}
+	// testing purposes
+	//if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Enter)) {
+	//	finishGame();
+	//}
 }
 
 void GameScreen::loseLife()
