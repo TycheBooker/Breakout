@@ -111,8 +111,8 @@ void Level::loadLevel(std::string levelPath)
 
 void Level::setLevelAttributes(tinyxml2::XMLElement * level)
 {
-	const char * backgroundTexture = nullptr;
-	const char * nextLevel = nullptr;
+	const char * backgroundTexture = "";
+	const char * nextLevel = "";
 
 	level->QueryIntAttribute("RowCount", &rowCount);
 	level->QueryIntAttribute("ColumnCount", &columnCount);
@@ -123,16 +123,9 @@ void Level::setLevelAttributes(tinyxml2::XMLElement * level)
 	level->QueryIntAttribute("BrickHeight", &brickHeight);
 	level->QueryStringAttribute("NextLevel", &nextLevel);
 
-	if (backgroundTexture != nullptr) {
-		this->backgroundTexture = AssetManager::getInstance()->getTexture(backgroundTexture);
-		background.setTexture(&this->backgroundTexture);
-	}
-	if (nextLevel != nullptr) {
-		this->nextLevel = { nextLevel };
-	}
-	else {
-		this->nextLevel = {};
-	}
+	this->backgroundTexture = AssetManager::getInstance()->getTexture(backgroundTexture);
+	background.setTexture(this->backgroundTexture);
+	this->nextLevel = { nextLevel };
 }
 
 void Level::createBrickTypes(tinyxml2::XMLElement * level)
@@ -161,7 +154,13 @@ void Level::createBrickTypes(tinyxml2::XMLElement * level)
 void Level::createBricks(tinyxml2::XMLElement * level)
 {
 	tinyxml2::XMLElement* xmlBricks = level->FirstChildElement("Bricks");
-	std::string brickLayout = { xmlBricks->GetText() };
+	const char* brickText = xmlBricks->GetText();
+	if (brickText == nullptr) {
+		std::cerr << "Brick layout could not be read!" << std::endl;
+		return;
+	}
+
+	std::string brickLayout = { brickText };
 	brickLayout.erase(std::remove_if(brickLayout.begin(), brickLayout.end(), ::isspace), brickLayout.end());
 
 	float margin = (windowWidth - ((brickWidth + rowSpacing) * columnCount - rowSpacing)) / 2.f;
@@ -194,15 +193,6 @@ void Level::createBricks(tinyxml2::XMLElement * level)
 			++brickCount;
 		}
 	}
-}
-
-tinyxml2::XMLError Level::
-checkXMLResult(tinyxml2::XMLError result)
-{
-	if (result != tinyxml2::XML_SUCCESS) {
-		std::cerr << "Error while reading xml: " << result << " !" << std::endl;
-	}
-	return result;
 }
 
 void Level::evaluateBricks()

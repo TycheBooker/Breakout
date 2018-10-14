@@ -37,15 +37,22 @@ sf::FloatRect Paddle::getGlobalBounds()
 
 void Paddle::paddleCollision(Ball & ball)
 {
-	if (!getGlobalBounds().intersects(ball.getGlobalBounds())) return;
+	sf::FloatRect ballBounds = ball.getGlobalBounds();
+	sf::FloatRect paddleBounds = getGlobalBounds();
+	if (!paddleBounds.intersects(ballBounds)) return;
+
+	float intersectTop = ballBounds.top + ballBounds.height - paddleBounds.top;
+	float intersectBottom = paddleBounds.top + paddleBounds.height - ballBounds.top;
+
+	if (abs(intersectTop) > abs(intersectBottom)) return;      // bottom hit
 
 	ball.velocity.y = -ballVelocity;
 
 	if (getPosition().x < ball.getPosition().x) {
-		ball.velocity.x = -ballVelocity;
+		ball.velocity.x = ballVelocity;
 	}
 	else {
-		ball.velocity.x = ballVelocity;
+		ball.velocity.x = -ballVelocity;
 	}
 }
 

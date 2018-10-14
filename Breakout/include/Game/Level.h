@@ -25,7 +25,6 @@ private:
 	void setLevelAttributes(tinyxml2::XMLElement * level);
 	void createBrickTypes(tinyxml2::XMLElement * level);
 	void createBricks(tinyxml2::XMLElement * level);
-	tinyxml2::XMLError checkXMLResult(tinyxml2::XMLError result);
 
 	void evaluateBricks();
 	std::function<void(int)> increaseScore;
@@ -33,7 +32,7 @@ private:
 	std::vector<Brick *> bricks;
 	BrickTypes brickTypes;
 	sf::Texture backgroundTexture;
-	sf::RectangleShape background;
+	sf::Sprite background;
 
 	int rowCount;
 	int columnCount;

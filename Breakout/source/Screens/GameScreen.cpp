@@ -8,9 +8,9 @@ GameScreen::GameScreen(StateManager * stateManager) :
 	level(std::bind(&GameScreen::increaseScore, this, std::placeholders::_1)),
 	gameHUD(stateManager)
 {
+	gameObjects.push_back(&level);
 	gameObjects.push_back(&paddle);
 	gameObjects.push_back(&ball);
-	gameObjects.push_back(&level);
 	gameObjects.push_back(&gameHUD);
 }
 
